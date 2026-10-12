@@ -217,6 +217,15 @@ st.markdown("""
         font-size: 0.84rem;
         font-weight: 600;
         background: rgba(16, 185, 129, 0.15);
+        color: #34D399;
+        border: 1px solid rgba(52, 211, 153, 0.3);
+    }
+    .status-offline {
+        background: rgba(245, 158, 11, 0.15);
+        color: #FBBF24;
+        border: 1px solid rgba(251, 191, 36, 0.3);
+    }
+
     /* Transit Guidance Card */
     .transit-box {
         background: linear-gradient(135deg, rgba(30, 41, 59, 0.75) 0%, rgba(15, 23, 42, 0.85) 100%);
@@ -543,42 +552,35 @@ with tab_plan:
                 # Transit Guidance (Source -> Destination Route Options)
                 tg = itinerary_data.get("transit_guidance")
                 if tg:
-                    st.markdown(f"""
-                    <div class="transit-box">
-                        <div class="transit-header">
-                            <div class="transit-title">
-                                🚗 Transit Guidance: {tg['origin_city']} ➔ {tg['destination']}
-                            </div>
-                            <div class="transit-badge">
-                                ~{tg['approximate_distance_km']} km • Recommended: {tg['recommended_mode']}
-                            </div>
-                        </div>
-                    """, unsafe_allow_html=True)
-
+                    opts_html = ""
                     for opt in tg.get("options", []):
                         pp_str = f"₹{opt['estimated_cost_per_person']:,.0f}" if opt.get('estimated_cost_per_person') else "N/A"
                         grp_str = f"₹{opt['estimated_group_cost']:,.0f}" if opt.get('estimated_group_cost') else "N/A"
-                        st.markdown(f"""
-                        <div class="transit-option-card">
-                            <div class="transit-opt-top">
-                                <span class="transit-opt-label">{opt['label']}</span>
-                                <span class="transit-opt-cost">{pp_str} / person • {grp_str} Group Total</span>
-                            </div>
-                            <div class="transit-opt-route">📍 {opt['route_summary']} &nbsp;|&nbsp; ⏱️ {opt['estimated_duration_hours']}</div>
-                            <div class="transit-opt-adv">✨ {opt['key_advantages']}</div>
-                            <div class="transit-opt-advice">💡 {opt['booking_advice']}</div>
-                        </div>
-                        """, unsafe_allow_html=True)
+                        opts_html += f"""
+<div class="transit-option-card">
+    <div class="transit-opt-top">
+        <span class="transit-opt-label">{opt['label']}</span>
+        <span class="transit-opt-cost">{pp_str} / person &nbsp;•&nbsp; {grp_str} Total</span>
+    </div>
+    <div class="transit-opt-route">📍 {opt['route_summary']} &nbsp;|&nbsp; ⏱️ {opt['estimated_duration_hours']}</div>
+    <div class="transit-opt-adv">✨ {opt['key_advantages']}</div>
+    <div class="transit-opt-advice">💡 {opt['booking_advice']}</div>
+</div>"""
 
+                    advisory_html = ""
                     if tg.get("weather_or_seasonal_advisories"):
-                        adv_text = " • ".join(tg["weather_or_seasonal_advisories"])
-                        st.markdown(f"""
-                        <div class="advisory-pill">
-                            ⚠️ <strong>Transit & Weather Advisory:</strong> {adv_text}
-                        </div>
-                        """, unsafe_allow_html=True)
+                        adv_text = " &bull; ".join(tg["weather_or_seasonal_advisories"])
+                        advisory_html = f'<div class="advisory-pill">⚠️ <strong>Transit & Weather Advisory:</strong> {adv_text}</div>'
 
-                    st.markdown("</div>", unsafe_allow_html=True)
+                    full_transit_html = f"""<div class="transit-box">
+<div class="transit-header">
+    <div class="transit-title">🚗 Transit Guidance: {tg['origin_city']} ➔ {tg['destination']}</div>
+    <div class="transit-badge">~{tg['approximate_distance_km']} km • Recommended: {tg['recommended_mode']}</div>
+</div>
+{opts_html}
+{advisory_html}
+</div>"""
+                    st.markdown(full_transit_html, unsafe_allow_html=True)
 
                 # Days Plan
                 for day in itinerary_data["days"]:
