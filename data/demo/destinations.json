@@ -6,5 +6,61 @@
     "description": "Coastal state known for golden Arabian Sea beaches, Portuguese colonial architecture, rich seafood culinary heritage, and spice plantations.",
     "attraction_count": 10,
     "data_status": "demo_data"
+  },
+  {
+    "destination_id": "dest-shimla-02",
+    "name": "Shimla, India",
+    "country": "India",
+    "description": "Queen of the Hills, former British summer capital known for the historic Mall Road, Christ Church, pine-covered ridges, and UNESCO Kalka-Shimla Toy Train.",
+    "attraction_count": 6,
+    "data_status": "demo_data"
+  },
+  {
+    "destination_id": "dest-manali-03",
+    "name": "Manali, India",
+    "country": "India",
+    "description": "High-altitude Himalayan resort town famous for Solang Valley adventure sports, Rohtang Pass snow vistas, cedar forests, and Old Manali cafes.",
+    "attraction_count": 6,
+    "data_status": "demo_data"
+  },
+  {
+    "destination_id": "dest-jaipur-04",
+    "name": "Jaipur, India",
+    "country": "India",
+    "description": "The Pink City of Rajasthan renowned for grand Rajput forts (Amber, Nahargarh), City Palace, Hawa Mahal, and royal Rajasthani thali cuisine.",
+    "attraction_count": 6,
+    "data_status": "demo_data"
+  },
+  {
+    "destination_id": "dest-kerala-05",
+    "name": "Kerala (Kochi & Munnar), India",
+    "country": "India",
+    "description": "God's Own Country featuring emerald tea estates in Munnar, historic Fort Kochi Chinese fishing nets, Kathakali art, and serene backwaters.",
+    "attraction_count": 6,
+    "data_status": "demo_data"
+  },
+  {
+    "destination_id": "dest-varanasi-06",
+    "name": "Varanasi, India",
+    "country": "India",
+    "description": "Spiritual cultural capital along the sacred Ganges river, famed for ancient ghats, Dashashwamedh evening Ganga Aarti, silk weavers, and street foods.",
+    "attraction_count": 5,
+    "data_status": "demo_data"
+  },
+  {
+    "destination_id": "dest-udaipur-07",
+    "name": "Udaipur, India",
+    "country": "India",
+    "description": "The City of Lakes celebrated for Lake Pichola boat cruises, marble City Palace, Sajjangarh Monsoon Palace, and romantic sunset rooftop dining.",
+    "attraction_count": 5,
+    "data_status": "demo_data"
+  },
+  {
+    "destination_id": "dest-ooty-08",
+    "name": "Ooty, India",
+    "country": "India",
+    "description": "Nilgiri hill station renowned for emerald tea gardens, Pykara lake waterfalls, Doddabetta Peak, and the UNESCO Nilgiri Mountain Railway.",
+    "attraction_count": 5,
+    "data_status": "demo_data"
   }
 ]

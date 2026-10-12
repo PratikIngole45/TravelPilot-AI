@@ -389,14 +389,35 @@ with tab_plan:
                 origin_city = st.text_input(
                     "Origin City (Starting Point)",
                     value="",
-                    placeholder="e.g. Pune, Mumbai, Delhi, Chandigarh, Bengaluru"
+                    placeholder="e.g. Pune, Mumbai, Delhi, Bengaluru, Chandigarh, Kolkata"
                 )
             with col_route2:
-                destination = st.selectbox(
+                # Top curated destinations list with ability to type any custom destination
+                dest_options = [
+                    "Goa, India",
+                    "Shimla, India",
+                    "Manali, India",
+                    "Jaipur, India",
+                    "Kerala, India",
+                    "Udaipur, India",
+                    "Varanasi, India",
+                    "Ooty, India",
+                    "Custom (Enter Below)"
+                ]
+                selected_dest = st.selectbox(
                     "Destination",
-                    ["Goa, India", "Shimla, India"],
-                    index=0
+                    dest_options,
+                    index=0,
+                    help="Choose a top popular destination or select 'Custom' to enter any city"
                 )
+                if selected_dest == "Custom (Enter Below)":
+                    destination = st.text_input(
+                        "Enter Custom Destination",
+                        value="",
+                        placeholder="e.g. Srinagar, Ladakh, Munnar, Rishikesh, Darjeeling..."
+                    )
+                else:
+                    destination = selected_dest
 
             col_d1, col_d2 = st.columns(2)
             with col_d1:
@@ -443,8 +464,9 @@ with tab_plan:
     with col_result:
         st.subheader("Generated Itinerary")
         if submit_plan:
+            dest_final = destination.strip() if destination and destination.strip() else "Goa, India"
             payload = {
-                "destination": destination,
+                "destination": dest_final,
                 "origin_city": origin_city.strip() if origin_city.strip() else None,
                 "duration_days": duration_days,
                 "party_size": party_size,

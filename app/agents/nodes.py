@@ -52,6 +52,8 @@ def select_candidates_node(state: AgentState) -> Dict[str, Any]:
     """Node 4: Ranks candidate attractions using preferences and constraints."""
     req = TripPlanRequest(**state["request"])
     candidates = tools.rec_engine.rank_candidates(req)
+    if not candidates:
+        candidates = tools.rec_engine.get_all_attractions()
     candidate_dicts = [c.model_dump() for c in candidates]
     logger.info(f"[Node: select_candidates] Ranked {len(candidate_dicts)} candidates")
     return {"candidate_attractions": candidate_dicts}
