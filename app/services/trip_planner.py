@@ -7,6 +7,7 @@ from app.schemas.common import TimeBlock, Pace
 from app.services.recommendation import RecommendationEngine
 from app.services.budget_calculator import BudgetCalculator
 from app.services.itinerary_validator import ItineraryValidator
+from app.services.transit_router import TransitRouterService
 from app.core.logging import logger
 
 
@@ -123,12 +124,22 @@ class TripPlannerService:
         if request.notes:
             assumptions.append(f"User preference note noted: '{request.notes}'")
 
+        transit_guidance = None
+        if request.origin_city:
+            transit_guidance = TransitRouterService.get_transit_guidance(
+                origin_city=request.origin_city,
+                destination=request.destination,
+                party_size=request.party_size
+            )
+
         return ItineraryResponse(
             plan_id=f"plan-{uuid.uuid4().hex[:10]}",
             destination=request.destination,
+            origin_city=request.origin_city,
             duration_days=request.duration_days or 1,
             currency=request.budget.currency,
             budget_scope=request.budget.scope,
+            transit_guidance=transit_guidance,
             days=days,
             budget_summary=budget_summary,
             assumptions=assumptions,

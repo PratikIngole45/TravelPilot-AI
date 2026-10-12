@@ -11,6 +11,7 @@ class BudgetInput(BaseModel):
 
 
 class TripPlanRequest(BaseModel):
+    origin_city: Optional[str] = Field(None, max_length=100, description="Origin or starting city (e.g. Pune, Delhi, Mumbai, Bengaluru)")
     destination: str = Field(..., min_length=2, max_length=100, description="Destination city/region")
     duration_days: Optional[int] = Field(None, ge=1, le=30, description="Trip duration in days (1-30)")
     start_date: Optional[date] = Field(None, description="Start date of the trip")

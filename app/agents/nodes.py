@@ -8,6 +8,7 @@ from app.schemas.itinerary import ItineraryResponse, DayPlan, Activity, BudgetSu
 from app.schemas.common import TimeBlock, Pace, BudgetScope
 from app.services.budget_calculator import BudgetCalculator
 from app.services.itinerary_validator import ItineraryValidator
+from app.services.transit_router import TransitRouterService
 from app.core.logging import logger
 from app.core.config import settings
 
@@ -186,12 +187,22 @@ def finalize_output_node(state: AgentState) -> Dict[str, Any]:
         for err in state["validation_errors"]:
             all_warnings.append(f"Constraint notice: {err}")
 
+    transit_guidance = None
+    if req.origin_city:
+        transit_guidance = TransitRouterService.get_transit_guidance(
+            origin_city=req.origin_city,
+            destination=req.destination,
+            party_size=req.party_size
+        )
+
     response = ItineraryResponse(
         plan_id=f"plan-agent-{uuid.uuid4().hex[:8]}",
         destination=req.destination,
+        origin_city=req.origin_city,
         duration_days=req.duration_days or 1,
         currency=req.budget.currency,
         budget_scope=req.budget.scope,
+        transit_guidance=transit_guidance,
         days=days,
         budget_summary=summary,
         assumptions=assumptions,

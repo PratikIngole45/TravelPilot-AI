@@ -217,13 +217,97 @@ st.markdown("""
         font-size: 0.84rem;
         font-weight: 600;
         background: rgba(16, 185, 129, 0.15);
-        color: #34D399;
-        border: 1px solid rgba(52, 211, 153, 0.3);
+    /* Transit Guidance Card */
+    .transit-box {
+        background: linear-gradient(135deg, rgba(30, 41, 59, 0.75) 0%, rgba(15, 23, 42, 0.85) 100%);
+        border: 1px solid rgba(59, 130, 246, 0.35);
+        border-radius: 14px;
+        padding: 18px 22px;
+        margin-top: 1.2rem;
+        margin-bottom: 1.5rem;
+        backdrop-filter: blur(16px);
+        box-shadow: 0 4px 25px -3px rgba(0, 0, 0, 0.4);
     }
-    .status-offline {
-        background: rgba(245, 158, 11, 0.15);
+    .transit-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 12px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        padding-bottom: 10px;
+    }
+    .transit-title {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: #93C5FD;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    .transit-badge {
+        background: rgba(59, 130, 246, 0.2);
+        color: #93C5FD;
+        font-size: 0.8rem;
+        font-weight: 600;
+        padding: 4px 12px;
+        border-radius: 20px;
+        border: 1px solid rgba(147, 197, 253, 0.3);
+    }
+    .transit-option-card {
+        background: rgba(15, 23, 42, 0.55);
+        border: 1px solid rgba(255, 255, 255, 0.07);
+        border-radius: 10px;
+        padding: 12px 16px;
+        margin-bottom: 10px;
+        transition: all 0.2s ease;
+    }
+    .transit-option-card:hover {
+        border-color: rgba(99, 102, 241, 0.4);
+        background: rgba(30, 41, 59, 0.65);
+    }
+    .transit-opt-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 6px;
+    }
+    .transit-opt-label {
+        font-weight: 700;
+        color: #F8FAFC;
+        font-size: 0.98rem;
+    }
+    .transit-opt-cost {
+        color: #34D399;
+        font-weight: 700;
+        font-size: 0.9rem;
+    }
+    .transit-opt-route {
+        font-size: 0.85rem;
+        color: #94A3B8;
+        margin-bottom: 4px;
+        font-family: monospace;
+    }
+    .transit-opt-adv {
+        font-size: 0.82rem;
+        color: #CBD5E1;
+        line-height: 1.4;
+    }
+    .transit-opt-advice {
+        font-size: 0.78rem;
         color: #FBBF24;
+        margin-top: 4px;
+    }
+    .advisory-pill {
+        background: rgba(245, 158, 11, 0.12);
         border: 1px solid rgba(251, 191, 36, 0.3);
+        border-radius: 8px;
+        padding: 8px 12px;
+        margin-top: 10px;
+        font-size: 0.82rem;
+        color: #FDE68A;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -300,11 +384,19 @@ with tab_plan:
     with col_form:
         st.subheader("Trip Configuration")
         with st.form("trip_request_form"):
-            destination = st.selectbox(
-                "Destination",
-                ["Goa, India"],
-                index=0
-            )
+            col_route1, col_route2 = st.columns(2)
+            with col_route1:
+                origin_city = st.text_input(
+                    "Origin City (Starting Point)",
+                    value="",
+                    placeholder="e.g. Pune, Mumbai, Delhi, Chandigarh, Bengaluru"
+                )
+            with col_route2:
+                destination = st.selectbox(
+                    "Destination",
+                    ["Goa, India", "Shimla, India"],
+                    index=0
+                )
 
             col_d1, col_d2 = st.columns(2)
             with col_d1:
@@ -353,6 +445,7 @@ with tab_plan:
         if submit_plan:
             payload = {
                 "destination": destination,
+                "origin_city": origin_city.strip() if origin_city.strip() else None,
                 "duration_days": duration_days,
                 "party_size": party_size,
                 "budget": {
@@ -424,6 +517,46 @@ with tab_plan:
                     with st.expander("⚠️ System Notices & Constraint Warnings", expanded=True):
                         for w in itinerary_data["warnings"]:
                             st.write(f"- {w}")
+
+                # Transit Guidance (Source -> Destination Route Options)
+                tg = itinerary_data.get("transit_guidance")
+                if tg:
+                    st.markdown(f"""
+                    <div class="transit-box">
+                        <div class="transit-header">
+                            <div class="transit-title">
+                                🚗 Transit Guidance: {tg['origin_city']} ➔ {tg['destination']}
+                            </div>
+                            <div class="transit-badge">
+                                ~{tg['approximate_distance_km']} km • Recommended: {tg['recommended_mode']}
+                            </div>
+                        </div>
+                    """, unsafe_allow_html=True)
+
+                    for opt in tg.get("options", []):
+                        pp_str = f"₹{opt['estimated_cost_per_person']:,.0f}" if opt.get('estimated_cost_per_person') else "N/A"
+                        grp_str = f"₹{opt['estimated_group_cost']:,.0f}" if opt.get('estimated_group_cost') else "N/A"
+                        st.markdown(f"""
+                        <div class="transit-option-card">
+                            <div class="transit-opt-top">
+                                <span class="transit-opt-label">{opt['label']}</span>
+                                <span class="transit-opt-cost">{pp_str} / person • {grp_str} Group Total</span>
+                            </div>
+                            <div class="transit-opt-route">📍 {opt['route_summary']} &nbsp;|&nbsp; ⏱️ {opt['estimated_duration_hours']}</div>
+                            <div class="transit-opt-adv">✨ {opt['key_advantages']}</div>
+                            <div class="transit-opt-advice">💡 {opt['booking_advice']}</div>
+                        </div>
+                        """, unsafe_allow_html=True)
+
+                    if tg.get("weather_or_seasonal_advisories"):
+                        adv_text = " • ".join(tg["weather_or_seasonal_advisories"])
+                        st.markdown(f"""
+                        <div class="advisory-pill">
+                            ⚠️ <strong>Transit & Weather Advisory:</strong> {adv_text}
+                        </div>
+                        """, unsafe_allow_html=True)
+
+                    st.markdown("</div>", unsafe_allow_html=True)
 
                 # Days Plan
                 for day in itinerary_data["days"]:
