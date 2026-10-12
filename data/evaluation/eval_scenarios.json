@@ -1,0 +1,312 @@
+{
+  "retrieval_queries": [
+    {
+      "query_id": "rq-01",
+      "query": "Where is the Basilica of Bom Jesus and what relics are inside?",
+      "expected_doc_ids": ["demo-goa-guide-02"]
+    },
+    {
+      "query_id": "rq-02",
+      "query": "Which beach in South Goa is crescent shaped and quiet for kayaking?",
+      "expected_doc_ids": ["demo-goa-guide-03"]
+    },
+    {
+      "query_id": "rq-03",
+      "query": "What are signature Goan seafood dishes and what is Bebinca?",
+      "expected_doc_ids": ["demo-goa-guide-04"]
+    },
+    {
+      "query_id": "rq-04",
+      "query": "What are the seasonal months and best time to visit Goa?",
+      "expected_doc_ids": ["demo-goa-guide-01"]
+    },
+    {
+      "query_id": "rq-05",
+      "query": "What is the Latin Quarter Fontainhas in Panaji famous for?",
+      "expected_doc_ids": ["demo-goa-guide-02"]
+    },
+    {
+      "query_id": "rq-06",
+      "query": "Where can we do spice plantation tours in Ponda and have lunch?",
+      "expected_doc_ids": ["demo-goa-guide-04"]
+    },
+    {
+      "query_id": "rq-07",
+      "query": "What water sports and prices are typical in Calangute and Baga?",
+      "expected_doc_ids": ["demo-goa-guide-03"]
+    },
+    {
+      "query_id": "rq-08",
+      "query": "How does local transport like GoaMiles and scooter rentals work in Goa?",
+      "expected_doc_ids": ["demo-goa-guide-01"]
+    }
+  ],
+  "itinerary_scenarios": [
+    {
+      "id": "scn-01",
+      "destination": "Goa, India",
+      "duration_days": 3,
+      "party_size": 2,
+      "budget": {"amount": 15000, "currency": "INR", "scope": "local_trip_only"},
+      "interests": ["beaches", "history", "local_food"],
+      "pace": "relaxed",
+      "traveller_profile": "couple",
+      "excluded_activities": ["nightclub"],
+      "notes": "Prefer affordable places and avoid packed schedule."
+    },
+    {
+      "id": "scn-02",
+      "destination": "Goa, India",
+      "duration_days": 2,
+      "party_size": 1,
+      "budget": {"amount": 5000, "currency": "INR", "scope": "local_trip_only"},
+      "interests": ["history"],
+      "pace": "balanced",
+      "traveller_profile": "solo",
+      "excluded_activities": [],
+      "notes": "Solo heritage exploration."
+    },
+    {
+      "id": "scn-03",
+      "destination": "Goa, India",
+      "duration_days": 4,
+      "party_size": 4,
+      "budget": {"amount": 35000, "currency": "INR", "scope": "local_trip_only"},
+      "interests": ["beaches", "local_food", "nature"],
+      "pace": "balanced",
+      "traveller_profile": "family",
+      "excluded_activities": ["nightclub", "casinos"],
+      "notes": "Family vacation with children."
+    },
+    {
+      "id": "scn-04",
+      "destination": "Goa, India",
+      "duration_days": 1,
+      "party_size": 2,
+      "budget": {"amount": 4000, "currency": "INR", "scope": "local_trip_only"},
+      "interests": ["local_food", "history"],
+      "pace": "packed",
+      "traveller_profile": "couple",
+      "excluded_activities": [],
+      "notes": "Quick one day cultural food trip."
+    },
+    {
+      "id": "scn-05",
+      "destination": "Goa, India",
+      "duration_days": 5,
+      "party_size": 2,
+      "budget": {"amount": 25000, "currency": "INR", "scope": "local_trip_only"},
+      "interests": ["beaches", "nature"],
+      "pace": "relaxed",
+      "traveller_profile": "couple",
+      "excluded_activities": ["trekking"],
+      "notes": "Relaxed seaside holiday."
+    },
+    {
+      "id": "scn-06",
+      "destination": "Goa, India",
+      "duration_days": 2,
+      "party_size": 3,
+      "budget": {"amount": 12000, "currency": "INR", "scope": "local_trip_only"},
+      "interests": ["history", "nature"],
+      "pace": "balanced",
+      "traveller_profile": "group",
+      "excluded_activities": ["nightclub"],
+      "notes": "Group of college friends."
+    },
+    {
+      "id": "scn-07",
+      "destination": "Goa, India",
+      "duration_days": 3,
+      "party_size": 2,
+      "budget": {"amount": 20000, "currency": "INR", "scope": "local_trip_only"},
+      "interests": ["nature", "local_food"],
+      "pace": "relaxed",
+      "traveller_profile": "couple",
+      "accessibility_needs": ["paved_pathways"],
+      "excluded_activities": [],
+      "notes": "Couple preferring accessible scenic spots."
+    },
+    {
+      "id": "scn-08",
+      "destination": "Goa, India",
+      "duration_days": 2,
+      "party_size": 4,
+      "budget": {"amount": 16000, "currency": "INR", "scope": "local_trip_only"},
+      "interests": ["beaches", "history"],
+      "pace": "packed",
+      "traveller_profile": "family",
+      "excluded_activities": ["nightclub"],
+      "notes": "Active weekend family trip."
+    },
+    {
+      "id": "scn-09",
+      "destination": "Goa, India",
+      "duration_days": 1,
+      "party_size": 1,
+      "budget": {"amount": 3000, "currency": "INR", "scope": "local_trip_only"},
+      "interests": ["nature"],
+      "pace": "relaxed",
+      "traveller_profile": "solo",
+      "excluded_activities": [],
+      "notes": "Day trip for wildlife photography."
+    },
+    {
+      "id": "scn-10",
+      "destination": "Goa, India",
+      "duration_days": 3,
+      "party_size": 6,
+      "budget": {"amount": 40000, "currency": "INR", "scope": "local_trip_only"},
+      "interests": ["beaches", "local_food"],
+      "pace": "balanced",
+      "traveller_profile": "group",
+      "excluded_activities": [],
+      "notes": "Large friends group seeking great food and beaches."
+    },
+    {
+      "id": "scn-11",
+      "destination": "Goa, India",
+      "duration_days": 4,
+      "party_size": 2,
+      "budget": {"amount": 18000, "currency": "INR", "scope": "local_trip_only"},
+      "interests": ["history", "beaches"],
+      "pace": "balanced",
+      "traveller_profile": "couple",
+      "excluded_activities": ["nightclub"],
+      "notes": "Balanced heritage and beach retreat."
+    },
+    {
+      "id": "scn-12",
+      "destination": "Goa, India",
+      "duration_days": 2,
+      "party_size": 2,
+      "budget": {"amount": 8000, "currency": "INR", "scope": "local_trip_only"},
+      "interests": ["local_food"],
+      "pace": "relaxed",
+      "traveller_profile": "couple",
+      "excluded_activities": [],
+      "notes": "Culinary tour of Panaji and Ponda."
+    },
+    {
+      "id": "scn-13",
+      "destination": "Goa, India",
+      "duration_days": 3,
+      "party_size": 1,
+      "budget": {"amount": 7500, "currency": "INR", "scope": "local_trip_only"},
+      "interests": ["nature", "beaches"],
+      "pace": "balanced",
+      "traveller_profile": "solo",
+      "excluded_activities": ["crowded_markets"],
+      "notes": "Solo escape seeking peace and tranquility."
+    },
+    {
+      "id": "scn-14",
+      "destination": "Goa, India",
+      "duration_days": 5,
+      "party_size": 3,
+      "budget": {"amount": 30000, "currency": "INR", "scope": "local_trip_only"},
+      "interests": ["history", "local_food", "nature"],
+      "pace": "balanced",
+      "traveller_profile": "family",
+      "excluded_activities": ["nightclub"],
+      "notes": "In-depth 5-day cultural and eco-tour."
+    },
+    {
+      "id": "scn-15",
+      "destination": "Goa, India",
+      "duration_days": 1,
+      "party_size": 2,
+      "budget": {"amount": 3500, "currency": "INR", "scope": "local_trip_only"},
+      "interests": ["beaches"],
+      "pace": "relaxed",
+      "traveller_profile": "couple",
+      "excluded_activities": [],
+      "notes": "Single day sunset beach escape."
+    },
+    {
+      "id": "scn-16",
+      "destination": "Goa, India",
+      "duration_days": 3,
+      "party_size": 4,
+      "budget": {"amount": 22000, "currency": "INR", "scope": "local_trip_only"},
+      "interests": ["history", "nature"],
+      "pace": "relaxed",
+      "traveller_profile": "family",
+      "accessibility_needs": ["wheelchair_accessible_entrance"],
+      "excluded_activities": ["strenuous_trek"],
+      "notes": "Wheelchair accessible family itinerary."
+    },
+    {
+      "id": "scn-17",
+      "destination": "Goa, India",
+      "duration_days": 2,
+      "party_size": 2,
+      "budget": {"amount": 10000, "currency": "INR", "scope": "local_trip_only"},
+      "interests": ["nature", "beaches"],
+      "pace": "packed",
+      "traveller_profile": "couple",
+      "excluded_activities": [],
+      "notes": "Active nature and water excursion."
+    },
+    {
+      "id": "scn-18",
+      "destination": "Goa, India",
+      "duration_days": 4,
+      "party_size": 2,
+      "budget": {"amount": 16000, "currency": "INR", "scope": "local_trip_only"},
+      "interests": ["local_food", "history"],
+      "pace": "relaxed",
+      "traveller_profile": "couple",
+      "excluded_activities": ["nightclub"],
+      "notes": "Budget-conscious relaxed heritage stay."
+    },
+    {
+      "id": "scn-19",
+      "destination": "Goa, India",
+      "duration_days": 2,
+      "party_size": 5,
+      "budget": {"amount": 25000, "currency": "INR", "scope": "local_trip_only"},
+      "interests": ["beaches", "local_food"],
+      "pace": "balanced",
+      "traveller_profile": "group",
+      "excluded_activities": [],
+      "notes": "Weekend beach trip for five friends."
+    },
+    {
+      "id": "scn-20",
+      "destination": "Goa, India",
+      "duration_days": 3,
+      "party_size": 1,
+      "budget": {"amount": 9000, "currency": "INR", "scope": "local_trip_only"},
+      "interests": ["history", "nature"],
+      "pace": "packed",
+      "traveller_profile": "solo",
+      "excluded_activities": [],
+      "notes": "Solo explorer covering maximum cultural ground."
+    },
+    {
+      "id": "scn-21",
+      "destination": "Goa, India",
+      "duration_days": 1,
+      "party_size": 4,
+      "budget": {"amount": 6000, "currency": "INR", "scope": "local_trip_only"},
+      "interests": ["history"],
+      "pace": "balanced",
+      "traveller_profile": "family",
+      "excluded_activities": [],
+      "notes": "Day trip to Old Goa churches and forts."
+    },
+    {
+      "id": "scn-22",
+      "destination": "Goa, India",
+      "duration_days": 2,
+      "party_size": 2,
+      "budget": {"amount": 9500, "currency": "INR", "scope": "local_trip_only"},
+      "interests": ["beaches", "nature"],
+      "pace": "relaxed",
+      "traveller_profile": "couple",
+      "excluded_activities": ["nightclub"],
+      "notes": "Quiet coastal scenery and bird watching."
+    }
+  ]
+}
